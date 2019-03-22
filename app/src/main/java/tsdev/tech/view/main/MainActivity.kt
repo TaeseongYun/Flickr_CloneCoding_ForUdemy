@@ -6,27 +6,24 @@ import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import tsdev.tech.R
 import tsdev.tech.util.replace
+import tsdev.tech.view.main.home.HomeFragment
 
 class MainActivity : AppCompatActivity() {
 
     private val homeFragment: HomeFragment by lazy {
-        HomeFragment().apply {
-            arguments = Bundle().apply {
-                putInt(HomeFragment.KEY_TITLE, R.string.title_home)
-            }
-        }
+        HomeFragment()
     }
     private val cameraFragment: CameraFragment by lazy {
         CameraFragment().apply {
             arguments = Bundle().apply {
-                putInt(HomeFragment.KEY_TITLE, R.string.title_camera)
+                putInt(CameraFragment.KEY_TITLE, R.string.title_camera)
             }
         }
     }
     private val moreFragment: MoreFragment by lazy {
         MoreFragment().apply {
             arguments = Bundle().apply {
-                putInt(HomeFragment.KEY_TITLE, R.string.title_more)
+                putInt(MoreFragment.KEY_TITLE, R.string.title_more)
             }
         }
     }
