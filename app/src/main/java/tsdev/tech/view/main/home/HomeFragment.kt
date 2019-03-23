@@ -7,17 +7,34 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_home.*
 import tsdev.tech.R
+import tsdev.tech.data.source.flickr.FlickrRepository
 import tsdev.tech.data.source.image.ImageRepository
 import tsdev.tech.view.main.home.adapter.ImageRecyclerAdapter
 import tsdev.tech.view.main.home.presenter.HomeContract
 import tsdev.tech.view.main.home.presenter.HomePresenter
 
 class HomeFragment : Fragment(), HomeContract.View {
+    override fun showLoadFail() {
+        if( isDetached ) return
+
+        Toast.makeText(context, "Load Fail", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showLoadFail(message: String) {
+        if( isDetached ) return
+
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
 
     private val homePresenter: HomePresenter by lazy {
-        HomePresenter(this@HomeFragment, ImageRepository, imageRecyclerAdapter)
+        HomePresenter(this@HomeFragment,
+            FlickrRepository,
+            ImageRepository,
+            imageRecyclerAdapter)
     }
 
     private val imageRecyclerAdapter: ImageRecyclerAdapter by lazy {
@@ -37,7 +54,7 @@ class HomeFragment : Fragment(), HomeContract.View {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homePresenter.loadImage()
+        homePresenter.loadFlickrImage()
 
         recycler_view.run {
             adapter = imageRecyclerAdapter
@@ -63,8 +80,8 @@ class HomeFragment : Fragment(), HomeContract.View {
             val totalItemCount = imageRecyclerAdapter.itemCount
             val firstVisibleItem = (recyclerView.layoutManager as? GridLayoutManager)?.findFirstVisibleItemPosition() ?: 0
 
-            if (!homePresenter.isLoading && (firstVisibleItem + visibleItemCount) >= totalItemCount - 7) {
-                homePresenter.loadImage()
+            if (!homePresenter.isLoading && (firstVisibleItem + visibleItemCount) >= totalItemCount - 3) {
+                homePresenter.loadFlickrImage()
             }
         }
     }

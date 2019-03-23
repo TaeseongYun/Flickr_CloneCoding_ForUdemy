@@ -6,21 +6,6 @@
                                              android:background="#000"
                                              xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="10dp"
-            android:textSize="20sp"
-            android:textColor="#fff"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/img_view"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="ImageName"/>
-
     <tsdev.tech.view.custom.GlideImageView
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -28,7 +13,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_title"
+            app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/sample_01"
             android:scaleType="centerCrop"/>
 </android.support.constraint.ConstraintLayout>

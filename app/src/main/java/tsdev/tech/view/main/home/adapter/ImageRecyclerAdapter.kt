@@ -4,15 +4,16 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import tsdev.tech.data.ImageData
+import tsdev.tech.data.Photo
 import tsdev.tech.view.main.home.adapter.holder.ImageViewHolder
 import tsdev.tech.view.main.home.adapter.model.ImageRecyclerModel
 
 class ImageRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     ImageRecyclerModel {
 
-    private val list = mutableListOf<ImageData>()
+    private val list = mutableListOf<Photo>()
 
-    override fun addItem(imageData: ImageData) {
+    override fun addItem(imageData: Photo) {
         list.add(imageData)
     }
 
