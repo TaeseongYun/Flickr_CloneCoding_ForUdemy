@@ -20,6 +20,7 @@ class ImageViewHolder(context: Context, parent: ViewGroup?)
 
         tv_title.text = item.name
         //View 에 있는 context 를 가져옴
-        img_view.setImageResource(resources.getIdentifier(item.fileName, "drawable", context.packageName))
+//        img_view.setImageResource(resources.getIdentifier(item.fileName, "drawable", context.packageName))
+        img_view.loadImage(item.fileName)
     }
 }

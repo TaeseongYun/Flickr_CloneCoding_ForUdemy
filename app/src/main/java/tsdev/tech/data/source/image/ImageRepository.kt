@@ -5,11 +5,11 @@ import tsdev.tech.data.ImageData
 object ImageRepository : ImageDataSource{
 
 
-    private val imageLocalData: ImageLocalData by lazy {
-        ImageLocalData()
+    private val IMAGE_REMOTE_DATA: ImageRemoteData by lazy {
+        ImageRemoteData()
     }
 
     override fun loadImageFileName(imageDataList: (List<ImageData>) -> Unit, size: Int) {
-        imageLocalData.loadImageFileName(imageDataList, size)
+        IMAGE_REMOTE_DATA.loadImageFileName(imageDataList, size)
     }
 }
