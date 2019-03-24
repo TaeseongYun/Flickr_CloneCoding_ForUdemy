@@ -13,7 +13,6 @@ import tsdev.tech.view.main.home.adapter.model.ImageRecyclerModel
 
 class HomePresenter(val view: HomeContract.View,
                     private val flickrRepository: FlickrRepository,
-                    private val imageRepository: ImageRepository,
                     private val imageRecyclerModel: ImageRecyclerModel) : HomeContract.Presenter {
 
 
@@ -22,13 +21,18 @@ class HomePresenter(val view: HomeContract.View,
     private val perPage = 50
     private var page = 0
 
+    init {
+        imageRecyclerModel.onClick = { position ->
+            view.showBottomSheetDialog(imageRecyclerModel.getItem(position).id)
+        }
+    }
     override fun loadFlickrImage() {
         isLoading = true
         view.showProgress()
 
-        flickrRepository.getRecentPhoto("Eiffel Tower", ++page, perPage)
+        flickrRepository.getSearchPhoto("The Eiffel Tower", ++page, perPage)
             .enqueue(object : Callback<PhotoResponse> {
-                override fun onFailure(call: Call<PhotoResponse>, t: Throwable) {
+                override fun onFailure(call: Call<PhotoResponse>?, t: Throwable) {
                     //실패하였을 경우 처리
                     view.hideProgress()
                     view.showLoadFail()
@@ -36,9 +40,9 @@ class HomePresenter(val view: HomeContract.View,
                     isLoading = false
                 }
 
-                override fun onResponse(call: Call<PhotoResponse>, response: Response<PhotoResponse>) {
+                override fun onResponse(call: Call<PhotoResponse>?, response: Response<PhotoResponse>?) {
                     // 성공하였을 경우 처리
-                    if( response.isSuccessful ) {
+                    if( response?.isSuccessful == true ) {
                         response.body().takeIf { it?.stat == "ok" }?.let {
                             //성공한 경우에만 adapter item 추가하도록
                             page = it.photos.page

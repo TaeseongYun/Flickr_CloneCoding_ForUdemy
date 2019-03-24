@@ -59,7 +59,7 @@ data class Tag(
 )
 
 data class Title(
-    val _content: String
+    val _content: String = "Eiffel"
 )
 
 data class Comments(
@@ -100,7 +100,7 @@ data class Owner(
     val username: String
 ){
     fun getBouddyIcons()
-            = "http://farm${iconfarm}.staticflickr.com/${iconserver}/buddyicons/${nsid}.jpg"
+            = "http://farm$iconfarm.staticflickr.com/$iconserver/buddyicons/$nsid.jpg"
 }
 
 data class People(

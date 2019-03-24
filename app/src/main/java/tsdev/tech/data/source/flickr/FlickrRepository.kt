@@ -1,18 +1,21 @@
 package tsdev.tech.data.source.flickr
 
-import retrofit2.Call
-import tsdev.tech.data.PhotoResponse
+
 
 object FlickrRepository : FlickrDataSource {
 
 
+
     private val flickrRemoteData = FlickrRemoteData()
 
-    override fun getRecentPhoto(keyword: String, page: Int, perPage: Int)
-            = flickrRemoteData.getRecentPhoto(
+    override fun getSearchPhoto(keyword: String, page: Int, perPage: Int)
+            = flickrRemoteData.getSearchPhoto(
         keyword,
         page,
         perPage
     )
+
+    override fun getPhotoDetail(photoId: String)
+            = flickrRemoteData.getPhotoDetail(photoId)
 
 }

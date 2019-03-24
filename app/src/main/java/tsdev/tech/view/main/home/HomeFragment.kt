@@ -12,11 +12,17 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import tsdev.tech.R
 import tsdev.tech.data.source.flickr.FlickrRepository
 import tsdev.tech.data.source.image.ImageRepository
+import tsdev.tech.view.main.detail.DetailImageBottomSheet
 import tsdev.tech.view.main.home.adapter.ImageRecyclerAdapter
 import tsdev.tech.view.main.home.presenter.HomeContract
 import tsdev.tech.view.main.home.presenter.HomePresenter
 
 class HomeFragment : Fragment(), HomeContract.View {
+    override fun showBottomSheetDialog(photoId: String) {
+        if( isDetached ) return
+        DetailImageBottomSheet.create(photoId).show(activity.supportFragmentManager, "DetailImageBottomSheet")
+    }
+
     override fun showLoadFail() {
         if( isDetached ) return
 
@@ -33,7 +39,6 @@ class HomeFragment : Fragment(), HomeContract.View {
     private val homePresenter: HomePresenter by lazy {
         HomePresenter(this@HomeFragment,
             FlickrRepository,
-            ImageRepository,
             imageRecyclerAdapter)
     }
 

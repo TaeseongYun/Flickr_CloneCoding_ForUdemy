@@ -11,11 +11,16 @@ import tsdev.tech.view.main.home.adapter.model.ImageRecyclerModel
 class ImageRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     ImageRecyclerModel {
 
+
+    override lateinit var onClick: (Int) -> Unit
+
     private val list = mutableListOf<Photo>()
 
     override fun addItem(imageData: Photo) {
         list.add(imageData)
     }
+
+    override fun getItem(position: Int): Photo = list[position]
 
     override fun notifyDataSetChang() {
         notifyDataSetChanged()
@@ -24,7 +29,7 @@ class ImageRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<
 
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
-        return ImageViewHolder(context, parent)
+        return ImageViewHolder(onClick, context, parent)
     }
 
     override fun getItemCount(): Int = list.size
