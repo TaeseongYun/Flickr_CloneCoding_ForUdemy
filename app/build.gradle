@@ -58,5 +58,10 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
+    //Android BottomSheet
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    
     compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
