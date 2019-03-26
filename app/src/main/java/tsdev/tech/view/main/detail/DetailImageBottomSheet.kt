@@ -1,8 +1,10 @@
 package tsdev.tech.view.main.detail
 
 import android.app.Dialog
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.support.customtabs.CustomTabsIntent
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetDialogFragment
 import android.text.Html
@@ -16,6 +18,7 @@ import tsdev.tech.view.main.detail.presenter.DetailImageContract
 import tsdev.tech.view.main.detail.presenter.DetailImagePresenter
 
 class DetailImageBottomSheet : BottomSheetDialogFragment() , DetailImageContract.View {
+
 
     companion object {
         const val KEY_PHOTO_ID = "key-photo-id"
@@ -93,6 +96,7 @@ class DetailImageBottomSheet : BottomSheetDialogFragment() , DetailImageContract
         }
         img_web.setOnClickListener {
             //크롬 제작
+            detailImagePresent.loadFlickrWebPage()
         }
 
         detailImagePresent.loadDetailInfo(arguments.getString(KEY_PHOTO_ID))
@@ -100,6 +104,7 @@ class DetailImageBottomSheet : BottomSheetDialogFragment() , DetailImageContract
 
     override fun updateToolbarItem(buddyIcon: String, buddyName: String) {
         img_owner_image.loadImage(buddyIcon)
+        tv_owner_name.text = buddyName
     }
 
     override fun updateItem(imageUrl: String, title: String, content:String, date: String, viewCount: String, commentCount: String) {
@@ -116,5 +121,12 @@ class DetailImageBottomSheet : BottomSheetDialogFragment() , DetailImageContract
         tv_comment_count.text = commentCount
     }
 
+    override fun showFlickrWebPage(webUrl: String) {
+        CustomTabsIntent.Builder().apply {
+            setToolbarColor(resources.getColor(R.color.colorPrimary))
+        }.build().run {
+            launchUrl(context, Uri.parse(webUrl))
+        }
+    }
 
 }

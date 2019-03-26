@@ -10,6 +10,9 @@ import tsdev.tech.util.getDate
 
 class DetailImagePresenter(val view: DetailImageContract.View,
                            private val repository: FlickrRepository) : DetailImageContract.Presenter {
+
+    private var webUrl: String = ""
+
     override fun loadDetailInfo(photoId: String) {
         repository.getPhotoDetail(photoId)
             .enqueue(object : Callback<PhotoInfo> {
@@ -31,6 +34,9 @@ class DetailImagePresenter(val view: DetailImageContract.View,
                                 view.updateToolbarItem(
                                     it.owner.getBouddyIcons(),
                                     it.owner.username)
+
+                                //null 이면 null 리턴 하여서 엘비스 연산자가 빈칸으로 대체
+                                webUrl = it.urls.url.firstOrNull()?._content ?: ""
                             }
                         }
                     }
@@ -40,6 +46,13 @@ class DetailImagePresenter(val view: DetailImageContract.View,
 
                 }
             })
+    }
+
+    override fun loadFlickrWebPage() {
+        //url을 가지고 와야하는데 포토 안에 url 이 존재한다.
+        if(webUrl.isNotEmpty()) {
+            view.showFlickrWebPage(webUrl)
+        }
     }
 
 }
