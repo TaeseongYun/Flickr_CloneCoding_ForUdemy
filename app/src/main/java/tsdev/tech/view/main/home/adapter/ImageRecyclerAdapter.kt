@@ -11,7 +11,6 @@ import tsdev.tech.view.main.home.adapter.model.ImageRecyclerModel
 class ImageRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>(),
     ImageRecyclerModel {
 
-
     override lateinit var onClick: (Int) -> Unit
 
     private val list = mutableListOf<Photo>()
@@ -28,13 +27,13 @@ class ImageRecyclerAdapter(private val context: Context) : RecyclerView.Adapter<
 
 
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return ImageViewHolder(onClick, context, parent)
     }
 
     override fun getItemCount(): Int = list.size
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         (holder as? ImageViewHolder)?.onBind(list[position])
     }
 

@@ -82,10 +82,10 @@ class DetailImageBottomSheet : BottomSheetDialogFragment() , DetailImageContract
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View?
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View?
             = View.inflate(context, R.layout.layout_photo_detail, null)
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         img.setOnClickListener {
@@ -99,7 +99,7 @@ class DetailImageBottomSheet : BottomSheetDialogFragment() , DetailImageContract
             detailImagePresent.loadFlickrWebPage()
         }
 
-        detailImagePresent.loadDetailInfo(arguments.getString(KEY_PHOTO_ID))
+        detailImagePresent.loadDetailInfo(arguments?.getString(KEY_PHOTO_ID) ?: "NotLoadDatail")
     }
 
     override fun updateToolbarItem(buddyIcon: String, buddyName: String) {

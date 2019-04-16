@@ -20,7 +20,7 @@ import tsdev.tech.view.main.home.presenter.HomePresenter
 class HomeFragment : Fragment(), HomeContract.View {
     override fun showBottomSheetDialog(photoId: String) {
         if( isDetached ) return
-        DetailImageBottomSheet.create(photoId).show(activity.supportFragmentManager, "DetailImageBottomSheet")
+        DetailImageBottomSheet.create(photoId).show(activity?.supportFragmentManager, "DetailImageBottomSheet")
     }
 
     override fun showLoadFail() {
@@ -43,7 +43,7 @@ class HomeFragment : Fragment(), HomeContract.View {
     }
 
     private val imageRecyclerAdapter: ImageRecyclerAdapter by lazy {
-        ImageRecyclerAdapter(this@HomeFragment.context)
+        ImageRecyclerAdapter(this@HomeFragment.context!!)
     }
     override fun hideProgress() {
         progressBar.visibility = View.GONE
@@ -53,10 +53,10 @@ class HomeFragment : Fragment(), HomeContract.View {
         progressBar.visibility = View.VISIBLE
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater?.inflate(R.layout.fragment_home, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
+        inflater.inflate(R.layout.fragment_home, container, false)
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         homePresenter.loadFlickrImage()
